@@ -4,7 +4,6 @@ import datetime
 import pyttsx3
 import speech_recognition as sr
 import wikipedia
-print(hii i am tegveer singh)
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
