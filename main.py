@@ -4,13 +4,12 @@ import datetime
 import pyttsx3
 import speech_recognition as sr
 import wikipedia
-
+#This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 rate = engine.getProperty('rate')
 engine.setProperty('rate',180)
-#print(rate)
-#print(voices[0].id)
+#you can change voice according to you by changing the number in voice[].
 engine.setProperty('voice', voices[1].id)
 
 
@@ -19,12 +18,10 @@ def speak(audio):
     engine.runAndWait()
 
 
-
+#This is to define date and time.
 now = datetime.datetime.today()
-#print(now)
-#speak(now)
 
-
+#defineing takeCommand fn. it will recognize user audio input. 
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -47,6 +44,7 @@ if __name__ == '__main__':
     speak("i am Listening...")
     while True:
         query = takeCommand().lower()
+        #You should change the links,URLsand file location according to you. 
         if 'wake up' in query:
             speak('I am up sir')
         elif 'wikipedia' in query:
