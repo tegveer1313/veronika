@@ -4,6 +4,7 @@ import datetime
 import pyttsx3
 import speech_recognition as sr
 import wikipedia
+from googlesearch import search
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -56,6 +57,14 @@ if __name__ == '__main__':
         elif 'open youtube' in query:
             speak('opening youtube')
             webbrowser.open("youtube.com")
+        elif 'google' in query:
+            speak('What do you want to search..')
+            query = takeCommand().lower()
+            speak('Searching google..')
+            speak('I found 5 results')
+            for i in search(query, tld="com", num=5, stop=5, pause=2):
+                print(i)
+                speak(i)
         elif 'open drive' in query:
             speak('opening your drive')
             webbrowser.open("https://drive.google.com/drive/u/1/my-drive")
