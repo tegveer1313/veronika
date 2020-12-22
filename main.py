@@ -5,6 +5,7 @@ import pyttsx3
 import speech_recognition as sr
 import wikipedia
 from googlesearch import search
+import smtplib
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -39,6 +40,16 @@ def takeCommand():
         print("say that again please... OR cheak your internet ")
         return 'none'
     return query
+def sendEmail(to, content):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    speak("I need you email and its password, sir them Enter below")
+    send_to2 = input("Enter your Email:- ")
+    word = (input("Enter your password:- "))
+    server.login(send_to2, word)
+    server.sendmail('gameplay011202@gmail.com', to, content)
+    server.close()
 if __name__ == '__main__':
     speak("Hello sir i am Veronica, your personal study companiyan")
     speak("please tell what can i do for you sir..")
@@ -116,6 +127,18 @@ if __name__ == '__main__':
             speak('let me show you some movie sir')
             codePath = "C:\\Users\\pragati computers\\Desktop\\tegveer\\Jurassic World_ Fallen Kingdom_640P.mp4"
             os.startfile(codePath)
+        elif 'send email' in query:
+            speak("Sir enter below To whom do you want to send Email  ")
+            send_to = input("To whom do you want to send Email:- ")
+            try:
+                speak('What should I say')
+                content = takeCommand()
+                to = send_to
+                sendEmail(to, content)
+                speak("Email has been sent!")
+            except Exception as e:
+                print(e)
+                speak("Sorry sir i am not able to sent Email right now.")
         else:
             print("exit")
 else:
