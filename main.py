@@ -68,7 +68,12 @@ if __name__ == '__main__':
         elif 'open youtube' in query:
             speak('opening youtube')
             webbrowser.open("youtube.com")
-        elif 'google' in query:
+        elif 'search' in query:
+             speak('sir,  what should i search')
+             cm = takeCommand().lower()
+             speak('here's what i found')
+             webbrowser.open(f"{cm}")
+        elif 'link' in query:
             speak('What do you want to search..')
             query = takeCommand().lower()
             speak('Searching google..')
