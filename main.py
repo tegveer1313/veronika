@@ -49,7 +49,7 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    speak("I need you email and its password, sir them Enter below")
+    speak("I need you email and its password, sir enter them below")
     send_to2 = input("Enter your Email:- ")
     word = (input("Enter your password:- "))
     server.login(send_to2, word)
@@ -180,3 +180,4 @@ if __name__ == '__main__':
             print("exit")
 else:
     print("progaram exit")
+tegveer singh
