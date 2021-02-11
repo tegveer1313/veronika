@@ -6,13 +6,18 @@ import speech_recognition as sr
 import wikipedia
 from googlesearch import search
 import smtplib
+import bluetooth
+import pywifi
+import time
+from pywifi import const
+import speedtest
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 rate = engine.getProperty('rate')
 engine.setProperty('rate',180)
 #you can change voice according to you by changing the number in voice[].
-engine.setProperty('voice', voices[1].id)
+engine.setProperty('voice', voices[3].id)
 
 
 def speak(audio):
@@ -51,6 +56,7 @@ def sendEmail(to, content):
     server.sendmail('gameplay011202@gmail.com', to, content)
     server.close()
 if __name__ == '__main__':
+    name = "Tegveer Singh"
     speak("Hello sir i am Veronica, your personal study companiyan")
     speak("please tell what can i do for you sir..")
     speak("i am Listening...")
@@ -68,7 +74,12 @@ if __name__ == '__main__':
         elif 'open youtube' in query:
             speak('opening youtube')
             webbrowser.open("youtube.com")
-        elif 'google' in query:
+        elif 'search' in query:
+             speak('sir,  what should i search')
+             cm = takeCommand().lower()
+             speak('heres what i found')
+             webbrowser.open(f"{cm}")
+        elif 'link' in query:
             speak('What do you want to search..')
             query = takeCommand().lower()
             speak('Searching google..')
@@ -82,6 +93,14 @@ if __name__ == '__main__':
         elif 'time' in query:
             speak('the time is')
             speak(now)
+        elif 'internet speed' in query:
+            speak("testing internet speed")
+            st = speedtest.Speedtest()
+            dl = st.download()
+            up = st.upload()
+            dl2 = dl * 0.000001
+            up2 = up * 0.000001
+            speak(f"sir we have {dl2} mb per second downloading speed and {up2} mb per second upload ing speed")
         elif 'open my channel' in query:
             speak('opening your channel')
             webbrowser.open("https://www.youtube.com/channel/UCXeDwy9_kgTjo3tyFY9E7Tw?view_as=subscriber")
@@ -93,39 +112,57 @@ if __name__ == '__main__':
             webbrowser.open("google.com")
         elif 'who created you veronica' in query:
             speak("Tegveer singh had created me. he is my god")
+        elif 'bluetooth' in query:
+            speak("yes sir searching bluetooth")
+            nearby_devices = bluetooth.discover_devices(lookup_names=True)
+            print("Found {} devices.".format(len(nearby_devices)))
+            speak("Found {} devices nearby".format(len(nearby_devices)))
+            if nearby_devices == []:
+                speak("sir please check weather your bluetooth is on or not.")    
+            speak("here are the devices what i found")
+            for addr, name in nearby_devices:
+                print("{}".format(name))
+                speak("{}".format(name))
+        elif 'wi-fi' in query:
+            speak("yes sir searching wifi")
+            wifi = pywifi.PyWiFi()
+
+            Iface = wifi.interfaces()[0]
+            name = Iface.name()
+            Iface.scan()
+            time.sleep(1)
+
+            results = Iface.scan_results()
+            for data in results:
+                print(data.ssid)
+                speak(data.ssid)
+        elif "what's my name" in query:
+            speak(name)
+            ans = takeCommand().lower()
+            if "no" in ans:
+                speak("oh! sorry sir whats your name tell me i will remember it for future")
+                name = takeCommand().lower()
+            else:
+                speak("Something went wrong")
+        elif 'what can you do for me' in query:
+            speak("Hii sir i can write Emails and send them, i can search on google, play music, dont worry if you got bored i can even play moives for you and many more")
         elif 'good' in query:
             speak("Thank you sir,its my pleasure. any thing else")
         elif 'play music' in query:
             speak('playing music')
             from playsound import playsound
-            playsound('C:/Users/pragati computers/Desktop/tegveer/Dil_Meri_Na_Sune_Lyrical_-_Genius__Utkarsh,_Ishita__Atif_Aslam__Himesh_Reshammiya__Manoj(128kbps).mp3')
+            playsound('E:/VIDEO & MP3&WALLPAPER/A.R.RAHMAN/TU HI RE')
         elif 'open vs code' in query:
             speak('opening v s code')
-            codePath = "C:\\Program Files (x86)\\Microsoft VS Code\\Code.exe"
-            os.startfile(codePath)
-        elif 'open PyCharm' in query:
-            speak('opening PyCharm')
-            codePath = "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2020.2.2\\bin\\pycharm64.exe"
+            codePath = "C:\\Users\\DELL\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
         elif 'open blender' in query:
             speak('opening blender')
-            codePath = "C:\\Program Files\\Blender Foundation\\Blender\\blender.exe"
-            os.startfile(codePath)
-        elif 'open game' in query:
-            speak('opening your game')
-            codePath = "C:\\Program Files\\Desert Storm\\DesertStorm.exe"
-            os.startfile(codePath)
-        elif 'open notepad' in query:
-            speak('opening notepad')
-            codePath = "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
-            os.startfile(codePath)
-        elif 'open atom' in query:
-            speak('opening atom')
-            codePath = "C:\\Users\\pragati computers\\AppData\\Local\\atom\\atom.exe"
+            codePath = "C:\\Program Files\\Blender Foundation\\Blender 2.91\\blender.exe"
             os.startfile(codePath)
         elif 'movie' in query:
             speak('let me show you some movie sir')
-            codePath = "C:\\Users\\pragati computers\\Desktop\\tegveer\\Jurassic World_ Fallen Kingdom_640P.mp4"
+            codePath = "E:\VIDEO & MP3&WALLPAPER\Video full hd\Mere Wala Sardar (Full Song)  _ Jugraj Sandhu  _ New Song 2018 _ New Punjabi Songs 2018"
             os.startfile(codePath)
         elif 'send email' in query:
             speak("Sir enter below To whom do you want to send Email  ")
