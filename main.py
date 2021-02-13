@@ -11,6 +11,7 @@ import pywifi
 import time
 from pywifi import const
 import speedtest
+import psutil
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -57,7 +58,7 @@ def sendEmail(to, content):
     server.close()
 if __name__ == '__main__':
     name = "Tegveer Singh"
-    speak("Hello sir i am Veronica, your personal study companiyan")
+    speak("Hello sir i am Veronica")
     speak("please tell what can i do for you sir..")
     speak("i am Listening...")
     while True:
@@ -93,6 +94,13 @@ if __name__ == '__main__':
         elif 'time' in query:
             speak('the time is')
             speak(now)
+        elif 'battery' in query:
+            speak('checking battery status')
+            battery = psutil.sensors_battery()
+            battery_per = battery.percent
+            
+            if battery_per <= 50:
+                speak(f"your battery percent is {battery_per}. it is low plese plug in charger")
         elif 'internet speed' in query:
             speak("testing internet speed")
             st = speedtest.Speedtest()
