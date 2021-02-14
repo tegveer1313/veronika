@@ -110,7 +110,7 @@ if __name__ == '__main__':
             speak('checking battery status')
             battery = psutil.sensors_battery()
             battery_per = battery.percent
-            
+            speak(f"your battery is {battery_per} percent charged")
             if battery_per <= 50:
                 speak(f"your battery percent is {battery_per}. it is low plese plug in charger")
         elif 'internet speed' in query:
