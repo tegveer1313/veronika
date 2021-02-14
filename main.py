@@ -1,6 +1,6 @@
 import os
 import webbrowser
-import datetime
+from datetime import datetime
 import pyttsx3
 import speech_recognition as sr
 import wikipedia
@@ -27,8 +27,19 @@ def speak(audio):
 
 
 #This is to define date and time.
-now = datetime.datetime.today()
-
+def wish_me():
+    now = datetime.now()
+    hours = int(now.strftime("%H"))
+    minn = now.strftime("%M")
+    sec = now.strftime("%S")
+    
+    if hours >= 0 and hours < 12 :
+        speak("Good Moring sir")
+    elif hours >= 12 and hours < 18 :
+        speak("Good afternoon sir")
+    elif hours >= 18 :
+        speak("Good evening sir")
+        
 #defineing takeCommand fn. it will recognize user audio input. 
 def takeCommand():
     r = sr.Recognizer()
@@ -58,7 +69,8 @@ def sendEmail(to, content):
     server.close()
 if __name__ == '__main__':
     name = "Tegveer Singh"
-    speak("Hello sir i am Veronica")
+    wish_me()
+    speak("i am Veronica.")
     speak("please tell what can i do for you sir..")
     speak("i am Listening...")
     while True:
