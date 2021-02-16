@@ -12,6 +12,7 @@ import time
 from pywifi import const
 import speedtest
 import psutil
+import randfacts
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -32,7 +33,12 @@ def wish_me():
     hours = int(now.strftime("%H"))
     minn = now.strftime("%M")
     sec = now.strftime("%S")
-    
+
+    if hours >= 0 and hours < 12:
+        speak(f"its {hours} {minn} AM")
+    elif hours >= 12 and hours < 24 :
+        speak(f"its {hours} {minn} PM")
+
     if hours >= 0 and hours < 12 :
         speak("Good Moring sir")
     elif hours >= 12 and hours < 18 :
@@ -78,6 +84,9 @@ if __name__ == '__main__':
         #You should change the links,URLsand file location according to you. 
         if 'wake up' in query:
             speak('I am up sir')
+        if 'facts' in query:
+            x = randfacts.getFact()
+            speak(x)
         elif 'wikipedia' in query:
             speak('Searching Wikipedia..')
             query = query.replace("wikipedia", "")
