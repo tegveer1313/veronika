@@ -84,7 +84,7 @@ if __name__ == '__main__':
         #You should change the links,URLsand file location according to you. 
         if 'wake up' in query:
             speak('I am up sir')
-        if 'facts' in query:
+        if 'fact' in query:
             x = randfacts.getFact()
             speak(x)
         elif 'wikipedia' in query:
