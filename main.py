@@ -71,7 +71,7 @@ def sendEmail(to, content):
     send_to2 = input("Enter your Email:- ")
     word = (input("Enter your password:- "))
     server.login(send_to2, word)
-    server.sendmail('gameplay011202@gmail.com', to, content)
+    server.sendmail(send_to2, to, content)
     server.close()
 if __name__ == '__main__':
     name = "Tegveer Singh"
@@ -84,7 +84,7 @@ if __name__ == '__main__':
         #You should change the links,URLsand file location according to you. 
         if 'wake up' in query:
             speak('I am up sir')
-        if 'facts' in query:
+        if 'fact' in query:
             x = randfacts.getFact()
             speak(x)
         elif 'wikipedia' in query:
