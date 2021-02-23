@@ -71,7 +71,7 @@ def sendEmail(to, content):
     send_to2 = input("Enter your Email:- ")
     word = (input("Enter your password:- "))
     server.login(send_to2, word)
-    server.sendmail('gameplay011202@gmail.com', to, content)
+    server.sendmail(send_to2, to, content)
     server.close()
 if __name__ == '__main__':
     name = "Tegveer Singh"
