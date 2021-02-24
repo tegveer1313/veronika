@@ -113,8 +113,18 @@ if __name__ == '__main__':
             speak('opening your drive')
             webbrowser.open("https://drive.google.com/drive/u/1/my-drive")
         elif 'time' in query:
-            speak('the time is')
-            speak(now)
+            speak("yes sir")
+            now = datetime.now()
+            hours = int(now.strftime("%H"))
+            minn = now.strftime("%M")
+            sec = now.strftime("%S")
+
+            if hours >= 0 and hours < 12:
+                speak(f"its {hours} {minn} AM")
+            elif hours >= 12 and hours < 24 :
+                speak(f"its {hours} {minn} PM")
+            else :
+                speak("sorry sir i am not able to tell it now.")
         elif 'battery' in query:
             speak('checking battery status')
             battery = psutil.sensors_battery()
