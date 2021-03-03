@@ -11,6 +11,7 @@ import pywifi
 import time
 from pywifi import const
 import speedtest
+import pyautogui
 import psutil
 import randfacts
 #This is python text to speach.
@@ -187,6 +188,12 @@ if __name__ == '__main__':
             speak("Hii sir i can write Emails and send them, i can search on google, play music, dont worry if you got bored i can even play moives for you and many more")
         elif 'good' in query:
             speak("Thank you sir,its my pleasure. any thing else")
+        elif 'screenshot' in query:
+            speak("sir please tell me the name of this screenshot file")
+            h = takeCommand().lower()
+            speak("sir please hold the screen for few second, i am taking screenshot")
+            img = pyautogui.screenshot()
+            img.save(f'{h}.png')
         elif 'play music' in query:
             speak('playing music')
             from playsound import playsound
