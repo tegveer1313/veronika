@@ -194,6 +194,7 @@ if __name__ == '__main__':
             speak("sir please hold the screen for few second, i am taking screenshot")
             img = pyautogui.screenshot()
             img.save(f'{h}.png')
+            speak(" I am done with screenshot, i am ready for next command")
         elif 'play music' in query:
             speak('playing music')
             from playsound import playsound
