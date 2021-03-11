@@ -188,6 +188,15 @@ if __name__ == '__main__':
             speak("Hii sir i can write Emails and send them, i can search on google, play music, dont worry if you got bored i can even play moives for you and many more")
         elif 'good' in query:
             speak("Thank you sir,its my pleasure. any thing else")
+        elif 'volume up' in query:
+            pyautogui.press("volumeup")
+            speak("volume is increased by two units")
+        elif 'volume down' in query:
+            pyautogui.press("volumedown")
+            speak("volume is decreased by two units")
+        elif 'mute' in query:
+            pyautogui.press("volumemute")
+            print("volume is muted.")                        
         elif 'screenshot' in query:
             speak("sir please tell me the name of this screenshot file")
             h = takeCommand().lower()
