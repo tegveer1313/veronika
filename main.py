@@ -35,11 +35,6 @@ def wish_me():
     minn = now.strftime("%M")
     sec = now.strftime("%S")
 
-    if hours >= 0 and hours < 12:
-        speak(f"its {hours} {minn} AM")
-    elif hours >= 12 and hours < 24 :
-        speak(f"its {hours} {minn} PM")
-
     if hours >= 0 and hours < 12 :
         speak("Good Moring sir")
     elif hours >= 12 and hours < 18 :
@@ -47,12 +42,17 @@ def wish_me():
     elif hours >= 18 :
         speak("Good evening sir")
 
+    if hours >= 0 and hours < 12:
+        speak(f"its {hours} {minn} AM")
+    elif hours >= 12 and hours < 24 :
+        speak(f"its {hours} {minn} PM")
+
 #defineing takeCommand fn. it will recognize user audio input.
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.pause_threshold = 0.8
+        r.pause_threshold = 0.6
         audio = r.listen(source)
     try:
         print("Recognizing...")
@@ -61,6 +61,7 @@ def takeCommand():
 
     except Exception as e:
         # print(e)
+        speak("Sorry,i did not catch it please say that again")
         print("say that again please... OR cheak your internet ")
         return 'none'
     return query
@@ -77,7 +78,7 @@ def sendEmail(to, content):
 if __name__ == '__main__':
     name = "Tegveer Singh"
     wish_me()
-    speak("i am Veronica.")
+    speak("i am Veronica here.")
     speak("please tell what can i do for you sir..")
     speak("i am Listening...")
     while True:
@@ -87,6 +88,7 @@ if __name__ == '__main__':
             speak('I am up sir')
         if 'fact' in query:
             x = randfacts.getFact()
+            print(x)
             speak(x)
         elif 'wikipedia' in query:
             speak('Searching Wikipedia..')
