@@ -35,24 +35,24 @@ def wish_me():
     minn = now.strftime("%M")
     sec = now.strftime("%S")
 
-    if hours >= 0 and hours < 12:
-        speak(f"its {hours} {minn} AM")
-    elif hours >= 12 and hours < 24 :
-        speak(f"its {hours} {minn} PM")
-
     if hours >= 0 and hours < 12 :
         speak("Good Moring sir")
     elif hours >= 12 and hours < 18 :
         speak("Good afternoon sir")
     elif hours >= 18 :
         speak("Good evening sir")
-        
-#defineing takeCommand fn. it will recognize user audio input. 
+
+    if hours >= 0 and hours < 12:
+        speak(f"its {hours} {minn} AM")
+    elif hours >= 12 and hours < 24 :
+        speak(f"its {hours} {minn} PM")
+
+#defineing takeCommand fn. it will recognize user audio input.
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.pause_threshold = 0.8
+        r.pause_threshold = 0.6
         audio = r.listen(source)
     try:
         print("Recognizing...")
@@ -61,6 +61,7 @@ def takeCommand():
 
     except Exception as e:
         # print(e)
+        speak("Sorry,i did not catch it please say that again")
         print("say that again please... OR cheak your internet ")
         return 'none'
     return query
@@ -77,16 +78,17 @@ def sendEmail(to, content):
 if __name__ == '__main__':
     name = "Tegveer Singh"
     wish_me()
-    speak("i am Veronica.")
+    speak("i am Veronica here.")
     speak("please tell what can i do for you sir..")
     speak("i am Listening...")
     while True:
         query = takeCommand().lower()
-        #You should change the links,URLsand file location according to you. 
+        #You should change the links,URLsand file location according to you.
         if 'wake up' in query:
             speak('I am up sir')
         if 'fact' in query:
             x = randfacts.getFact()
+            print(x)
             speak(x)
         elif 'wikipedia' in query:
             speak('Searching Wikipedia..')
@@ -158,7 +160,7 @@ if __name__ == '__main__':
             print("Found {} devices.".format(len(nearby_devices)))
             speak("Found {} devices nearby".format(len(nearby_devices)))
             if nearby_devices == []:
-                speak("sir please check weather your bluetooth is on or not.")    
+                speak("sir please check weather your bluetooth is on or not.")
             speak("here are the devices what i found")
             for addr, name in nearby_devices:
                 print("{}".format(name))
@@ -196,7 +198,7 @@ if __name__ == '__main__':
             speak("volume is decreased by two units")
         elif 'mute' in query:
             pyautogui.press("volumemute")
-            print("volume is muted.")                        
+            print("volume is muted.")
         elif 'screenshot' in query:
             speak("sir please tell me the name of this screenshot file")
             h = takeCommand().lower()
