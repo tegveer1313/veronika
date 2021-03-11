@@ -46,8 +46,8 @@ def wish_me():
         speak("Good afternoon sir")
     elif hours >= 18 :
         speak("Good evening sir")
-        
-#defineing takeCommand fn. it will recognize user audio input. 
+
+#defineing takeCommand fn. it will recognize user audio input.
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     speak("i am Listening...")
     while True:
         query = takeCommand().lower()
-        #You should change the links,URLsand file location according to you. 
+        #You should change the links,URLsand file location according to you.
         if 'wake up' in query:
             speak('I am up sir')
         if 'fact' in query:
@@ -158,7 +158,7 @@ if __name__ == '__main__':
             print("Found {} devices.".format(len(nearby_devices)))
             speak("Found {} devices nearby".format(len(nearby_devices)))
             if nearby_devices == []:
-                speak("sir please check weather your bluetooth is on or not.")    
+                speak("sir please check weather your bluetooth is on or not.")
             speak("here are the devices what i found")
             for addr, name in nearby_devices:
                 print("{}".format(name))
@@ -196,7 +196,7 @@ if __name__ == '__main__':
             speak("volume is decreased by two units")
         elif 'mute' in query:
             pyautogui.press("volumemute")
-            print("volume is muted.")                        
+            print("volume is muted.")
         elif 'screenshot' in query:
             speak("sir please tell me the name of this screenshot file")
             h = takeCommand().lower()
