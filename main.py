@@ -14,6 +14,7 @@ import speedtest
 import pyautogui
 import psutil
 import randfacts
+import packages
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -84,9 +85,11 @@ if __name__ == '__main__':
     while True:
         query = takeCommand().lower()
         #You should change the links,URLsand file location according to you.
-        if 'wake up' in query:
-            speak('I am up sir')
-        if 'fact' in query:
+        if 'chat' in query:
+            speak("lets chat sir")
+            a = takeCommand().lower()
+            packages.achhafunc(a)
+        elif 'fact' in query:
             x = randfacts.getFact()
             print(x)
             speak(x)
