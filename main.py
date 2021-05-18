@@ -16,6 +16,10 @@ import psutil
 import randfacts
 import packages
 import sys
+import browserhistory as bh
+from bs4 import BeautifulSoup
+import requests
+import lxml
 #This is python text to speach.
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -118,6 +122,16 @@ if __name__ == '__main__':
                 elif 'open drive' in query:
                     speak('opening your drive')
                     webbrowser.open("https://drive.google.com/drive/u/1/my-drive")
+                elif 'news' in query:
+                    Webpage = requests.get("https://timesofindia.indiatimes.com/india/timestopten.cms")
+
+                    kab = BeautifulSoup(Webpage.content, "lxml")
+                    content = kab.find_all('a', class_="news_title")
+                    #print(content)
+
+                    for row in content:          # Print all occurrences
+                        print(row.get_text())
+                        speak(row.get_text())
                 elif 'time' in query:
                     speak("yes sir")
                     now = datetime.now()
