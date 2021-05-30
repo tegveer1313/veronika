@@ -132,6 +132,21 @@ if __name__ == '__main__':
                     for row in content:          # Print all occurrences
                         print(row.get_text())
                         speak(row.get_text())
+
+                elif 'temperature' in query:
+
+                    Webpage = requests.get("https://hi.weather.town/en/forecast/india/state-of-chhattisgarh/dongargarh/")
+
+                    kab = BeautifulSoup(Webpage.content, "lxml")
+                    Temp = kab.find('div', class_="temp").text
+                    print(f"Current Temperature is {Temp}")
+                    speak(f"Current Temperature is {Temp}")
+                    TempMor = kab.find('div', class_="temperature", id="infTempMorning").text
+                    print(f"Morning Temperature is{TempMor}")
+                    speak(f"Morning Temperature is{TempMor}")
+                    TempNight = kab.find('div', class_="temperature", id="infTempNight").text
+                    print(f"Night Temperature is{TempNight}")
+                    speak(f"Night Temperature is{TempNight}")           
                 elif 'time' in query:
                     speak("yes sir")
                     now = datetime.now()
